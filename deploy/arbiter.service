@@ -1,0 +1,21 @@
+[Unit]
+Description=Homelab Resource Arbiter (cgroups v2 I/O weight controller)
+After=local-fs.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/homelab-resource-arbiter
+ExecStart=/usr/bin/python3 -m arbiter run --priority-cgroup example-priority --background-cgroup example-background --interval 1.0
+Restart=on-failure
+RestartSec=5
+KillSignal=SIGTERM
+
+# Security hardening
+ProtectSystem=strict
+ReadWritePaths=/sys/fs/cgroup
+ProtectHome=true
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
