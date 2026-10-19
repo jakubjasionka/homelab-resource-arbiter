@@ -36,6 +36,9 @@ When a latency-sensitive service (`example-priority`) shares block storage with 
 +-------------------------------------------------------------------+
 ```
 
+
+> **Kernel check:** PSI is a compile-time option (`CONFIG_PSI`). Some vendor kernels for single-board computers ship without it. On such a kernel the arbiter cannot read pressure and will refuse to start. Verify with `ls /proc/pressure` before deploying.
+
 ## Requirements
 
 - **Operating System:** Linux with kernel PSI enabled (`CONFIG_PSI=y`, `/proc/pressure/*` and per-cgroup `io.pressure`).
